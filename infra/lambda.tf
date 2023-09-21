@@ -19,19 +19,31 @@ resource "aws_lambda_function" "lambda_terraform_poc_function" {
 # The IAM role the lambda assumes
 resource "aws_iam_role" "lambda_role" {
   name               = "lambda_role"
-  assume_role_policy = data.aws_iam_policy_document.lambda_policy.json
+  
+  # Adds a basic policy to the role
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Sid    = ""
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+      }
+    ]
+  })
 }
 
-# A policy added to the role
-data "aws_iam_policy_document" "lambda_policy" {
-  statement {
-    effect = "Allow"
+# Adds another policy to the role - AWSLambdaBasicExceutionRole, which allows the Lambda to created Cloudwtach logs among other things
+resource "aws_iam_role_policy_attachment" "basic_execution_role_policy" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
 
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
+# The Cloudwatch Log Group
+resource "aws_cloudwatch_log_group" "log_group" {
+  name = "/aws/lambda/${aws_lambda_function.lambda_terraform_poc_function.function_name}"
 
-    actions = ["sts:AssumeRole"]
-  }
+  retention_in_days = 30
 }
