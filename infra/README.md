@@ -1,15 +1,26 @@
-// *** Create a Terraform Repo ***
-// Want this video as a guide: https://www.youtube.com/watch?v=cGPyH-PO8vg
+// *** Links ***
+// Example repo: https://github.com/danielbryantuk/aws-lambda-terraform-java-play/blob/master/terraform/lambda.tf
+// Registry (AWS Terraform Resources): https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function
 
-// Create project
+
+// *** Create a Terraform Repo ***
+
+// Create your project
+mkdir my-project
+cd my-project
+
+// Add infra directory
+// (This step doesn't really matter, but if you want your code to be in the same repo, it's nice to separate infra from the code)
+mkdir infra
+
+// Initiate Terraform
+cd infra
 terraform init
 
 
-// *** Running Terraform ***
-// Cd into ./infra
-// Plan
+// *** Deploy Terraform ***
+cd infra
 terraform plan
-// Apply
 terraform apply
 
 
