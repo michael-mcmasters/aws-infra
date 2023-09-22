@@ -1,6 +1,6 @@
 # This file is based off of this tutorial: https://registry.terraform.io/providers/hashicorp/aws/2.34.0/docs/guides/serverless-with-aws-lambda-and-api-gateway
 
-# Acts as a container for all API Gateway objects being created
+# Acts as a container for all API Gateway resources being created
 resource "aws_api_gateway_rest_api" "example" {
   name        = "ServerlessExample"
   description = "Terraform Serverless Application Example"
@@ -36,9 +36,10 @@ resource "aws_api_gateway_integration" "lambda" {
 # I barely understand the next two portions, but I'll try to explain
 # API Gateway service calls the Lambda service to invoke it. To allow this, we need to create another method and integration.
 # (See this page for details: https://registry.terraform.io/providers/hashicorp/aws/2.34.0/docs/guides/serverless-with-aws-lambda-and-api-gateway)
+# TODO: Reading that page, I'm wondering if this is needed if I'll have endpoints. This seems to only be a workaround for the lambda to be called if I call the root endpoint with no additional path
 resource "aws_api_gateway_method" "proxy_root" {
   rest_api_id   = "${aws_api_gateway_rest_api.example.id}"
-  resource_id   = "${aws_api_gateway_rest_api.example.root_resource_id}"
+  resource_id   = "${aws_api_gateway_rest_api.example.root_resource_id}"    # Notice this is the root resource, which sits at the top of the REST API object
   http_method   = "ANY"
   authorization = "NONE"
 }
