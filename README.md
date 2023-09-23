@@ -1,12 +1,13 @@
-## Deploy Terraform 
+## Deploy Terraform
 ```
 cd infra
+terraform init   // Only run this command if you don't have an ./infra/.terraform.lock.hcl file locally
 terraform plan
 terraform apply
 ```
 
 To deploy a new jar file, simply replace the existing jar file with your new jar file.
-<br />
+
 If you want to deploy another runtime, such as JavaScript, it's a bit more complicated where you'll need a deployment package (just a folder structure) and will need to zip it using another Terraform resource. Luckily this isn't needed for jars.
 
 
@@ -35,10 +36,9 @@ Provisioning API Gateway:
 <br />
 https://registry.terraform.io/providers/hashicorp/aws/2.34.0/docs/guides/serverless-with-aws-lambda-and-api-gateway
 
-
-## What I've Learned
-All of these files are condensed into one. So it doesn't matter where a resource is defined.
-
+Deploying a frontend website:
+<br />
+https://dev.to/aws-builders/how-to-deploy-a-serverless-website-with-terraform-5677
 
 ## Create a New Terraform Repo
 (If you wanted to create a new repo from scratch instead of using this one)
@@ -55,6 +55,10 @@ Initiate Terraform
 cd infra
 terraform init
 ```
+
+## What I've Learned
+All of these files are condensed into one. So it doesn't matter where a resource is defined.
+
 
 ## My goals for this repo
 - Learn more about Terraform.
