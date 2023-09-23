@@ -59,6 +59,10 @@ terraform init
 ## What I've Learned
 All of these files are condensed into one. So it doesn't matter where a resource is defined.
 
+As long as you're fine with a randomly generated DNS name, you can deploy a protected website easily with HTTPS and a signed certificate.
+<br />
+If you want your own domain, you will need to buy it at Route53 and get a signed certificate.
+
 
 ## My goals for this repo
 - Learn more about Terraform.
