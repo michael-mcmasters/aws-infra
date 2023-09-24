@@ -11,15 +11,15 @@ resource "aws_s3_account_public_access_block" "website_bucket" {
 
 resource "aws_s3_object" "website_bucket" {
   bucket       = aws_s3_bucket.website_bucket.id
-  key          = "index.html"
-  source       = "index.html"
+  key          = "website"          # The object name (key)
+  source       = "../index.html"    # Where the source code is
   content_type = "text/html"
 }
 
 resource "aws_cloudfront_distribution" "cdn_static_site" {
   enabled             = true
   is_ipv6_enabled     = true
-  default_root_object = "index.html"
+  default_root_object = "website"   # The S3 object name (key) (I'm pretty sure)
   comment             = "my cloudfront in front of the s3 bucket"
 
   origin {
