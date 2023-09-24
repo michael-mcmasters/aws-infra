@@ -20,6 +20,11 @@ Can't find schema:
 <br />
 You will get this error ocasionally. It has something to do with the Terraform AWS provider. Simply re-run the command and it will go through eventually.
 
+Error: Error acquiring the state lock
+<br />
+This occurs when a previous terraform command never stopped. In VSCode, right click killing the terminal fixed it for me. You can also follow the directions on this page: https://stackoverflow.com/questions/62189825/terraform-error-acquiring-the-state-lock-conditionalcheckfailedexception
+<br />
+Be careful with this. I ignored this error and Terraform state went out of sync. I had to go into the console and manually destroy resources to get everything running again.
 
 ## Resources
 A lot of this repo comes from the following documentation
