@@ -1,3 +1,6 @@
+### aws-infra
+
+
 ## Deploy Terraform
 ```
 cd infra
@@ -6,7 +9,29 @@ terraform plan
 terraform apply
 ```
 
-To deploy a new jar file, simply replace the existing jar file with your new jar file.
+## Deploy Build to S3 (UI)
+In React, build the project to generate a ./build directory
+```
+npm run build
+```
+
+Delete all current objects in the bucket
+```
+aws s3 rm s3://<BUCKET_NAME> --recursive
+```
+
+Upload the new ./build to the bucket
+```
+aws s3 cp ./build s3://<BUCKET_NAME>/ --recursive
+```
+
+If successful, the content inside of ./build will be uploaded to S3 (index.html, static/, etc).
+<br />
+CloudFront directs traffic to index.html.
+
+
+## Deploy Build to Lambda (Backend)
+To deploy a new jar file, simply replace the existing jar file (in this repo) with your new jar file.
 
 If you want to deploy another runtime, such as JavaScript, it's a bit more complicated where you'll need a deployment package (just a folder structure) and will need to zip it using another Terraform resource. Luckily this isn't needed for jars.
 
@@ -66,26 +91,6 @@ Initiate Terraform
 (Create main.tf and copy/paste the code from this repo's main.tf)
 terraform init
 ```
-
-
-## Deploying React Build to S3
-In React, build the project to generate a ./build directory
-```
-npm run build
-```
-
-Delete all objects in the bucket
-```
-aws s3 rm s3://<BUCKET_NAME> --recursive
-```
-
-Upload ./build to the bucket
-```
-aws s3 cp ./build s3://<BUCKET_NAME>/ --recursive
-```
-
-If successful, the content inside of ./build will be uploaded to S3 (index.html, static/, etc).
-CloudFront directs traffic to index.html.
 
 
 ## What I've Learned
