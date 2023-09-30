@@ -20,9 +20,13 @@ Can't find schema:
 <br />
 You will get this error ocasionally. It has something to do with the Terraform AWS provider. Simply re-run the command and it will go through eventually.
 
+Error: Failed to load plugin schemas:
+<br />
+This occurs randomly when the AWS provider doesn't respond to Terraform. Just re-run your command and it should go away eventually.
+
 Error: Error acquiring the state lock
 <br />
-This occurs when a previous terraform command never stopped. In VSCode, right click killing the terminal fixed it for me. You can also follow the directions on this page: https://stackoverflow.com/questions/62189825/terraform-error-acquiring-the-state-lock-conditionalcheckfailedexception
+This occurs when a previous terraform command never stopped. Terraform "locks" any more commands from running because it thinks someone else is running an apply and doesn't want you to conflict with it. In VSCode, right clicking the terminal and killing it fixed it for me. You can also follow the directions on this page: https://stackoverflow.com/questions/62189825/terraform-error-acquiring-the-state-lock-conditionalcheckfailedexception
 <br />
 Be careful with this. I ignored this error and Terraform state went out of sync. I had to go into the console and manually destroy resources to get everything running again.
 
