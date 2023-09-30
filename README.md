@@ -57,11 +57,12 @@ Create your project
 mkdir my-project
 cd my-project
 mkdir infra    // Create a sub-folder to separate your infra from your main codebase if using one repo
+cd infra
 ```
 
 Initiate Terraform
 ```
-cd infra
+(Create main.tf and copy/paste the code from this repo's main.tf)
 terraform init
 ```
 
