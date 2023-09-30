@@ -69,18 +69,23 @@ terraform init
 
 
 ## Deploying React Build to S3
-In React, build the project
+In React, build the project to generate a ./build directory
 ```
 npm run build
 ```
 
-This will generate a ./build directory.
-Upload it to S3.
+Delete all objects in the bucket
 ```
-aws s3 cp ./<LOCAL_FOLDER> s3://<BUCKET_NAME>/ --recursive      // Ex: aws s3 cp ./build s3://manually-created-bucket-temp/ --recursive
+aws s3 rm s3://<BUCKET_NAME> --recursive
+```
+
+Upload ./build to the bucket
+```
+aws s3 cp ./build s3://<BUCKET_NAME>/ --recursive
 ```
 
 If successful, the content inside of ./build will be uploaded to S3 (index.html, static/, etc).
+CloudFront directs traffic to index.html.
 
 
 ## What I've Learned
