@@ -49,6 +49,7 @@ Deploying a frontend website:
 <br />
 https://dev.to/aws-builders/how-to-deploy-a-serverless-website-with-terraform-5677
 
+
 ## Create a New Terraform Repo
 (If you wanted to create a new repo from scratch instead of using this one)
 
@@ -65,6 +66,22 @@ Initiate Terraform
 (Create main.tf and copy/paste the code from this repo's main.tf)
 terraform init
 ```
+
+
+## Deploying React Build to S3
+In React, build the project
+```
+npm run build
+```
+
+This will generate a ./build directory.
+Upload it to S3.
+```
+aws s3 cp ./<LOCAL_FOLDER> s3://<BUCKET_NAME>/ --recursive      // Ex: aws s3 cp ./build s3://manually-created-bucket-temp/ --recursive
+```
+
+If successful, the content inside of ./build will be uploaded to S3 (index.html, static/, etc).
+
 
 ## What I've Learned
 All of these files are condensed into one. So it doesn't matter where a resource is defined.
